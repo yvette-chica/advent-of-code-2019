@@ -1,7 +1,3 @@
-const fs = require('fs');
-const input = fs.readFileSync('../input/day05', 'utf8')
-    .trim().split(',').map(string => parseInt(string));
-
 // Helper functions
 const getParameterModes = (instruction) => {
     let stringInstruction = instruction.toString();
@@ -15,10 +11,10 @@ const getParameterModes = (instruction) => {
     return { param1mode, param2mode, opcode };
 }
 
-const getParamValue = (param, mode) => {
+const getParamValue = (mode, paramImmediate, paramPosition) => {
     // Position mode: 0
     // Immediate mode: 1
-    return mode === 1 ? param : input[param]; 
+    return mode === 1 ? paramImmediate : paramPosition; 
 }
 
 const applyOperation = (param1, param2, opcode) => {
@@ -26,7 +22,7 @@ const applyOperation = (param1, param2, opcode) => {
 }
 
 
-const intCodeComputer = (input, software) => {
+const intCodeComputer = (inputs, software) => {
     let pointer = 0;
 
     while (pointer < software.length) {
@@ -36,8 +32,8 @@ const intCodeComputer = (input, software) => {
         let param2 = software[pointer + 2];
         let storageLocation = software[pointer + 3];
 
-        let param1value = getParamValue(param1, param1mode);
-        let param2value = getParamValue(param2, param2mode);
+        let param1value = getParamValue(param1mode, param1, software[param1]);
+        let param2value = getParamValue(param2mode, param2, software[param2]);
 
         switch (opcode) {
             // Opcode 1:
@@ -54,7 +50,9 @@ const intCodeComputer = (input, software) => {
             //      takes integer as input and saves to position given by its only parameter
             //      3,50 takes input and stores to address 50 (only position mode)
             case 3:
-                software[param1] = input;
+                const opcode3input = inputs.shift();
+                console.log('opcode 3 input:', opcode3input);
+                software[param1] = opcode3input;
                 pointer += 2;
                 break;
 
@@ -62,7 +60,9 @@ const intCodeComputer = (input, software) => {
             //      outpus value of only parameter
             //      4,50 outputs value at address 50 (only position mode)
             case 4:
+                //console.log('pointer:', pointer);
                 console.log('output:', software[param1]);
+                return software[param1];
                 pointer += 2;
                 break;
 
@@ -115,5 +115,5 @@ const intCodeComputer = (input, software) => {
     }
 }
 
-module.exports = { intCodeComputer }
+module.exports = intCodeComputer;
 
