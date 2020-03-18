@@ -5,7 +5,7 @@ const Computer = require('./Computer');
 const heapPermutation = require('./heapPermutation');
 
 
-const phaseSettingSequence = [0, 1, 2, 3, 4];
+const phaseSettingSequence = [5, 6, 7, 8, 9];
 const settingSequencePermutations = [];
 
 const getThrusterOutput = (controllerSoftware, phaseSettingSequence) => {

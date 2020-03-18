@@ -26,9 +26,5 @@ function swap(arr, idxA, idxB) {
     arr[idxB] = tmp;
 }
 
-const result = []
-generate(3, [0,1,2], result);
-console.log('result', result);
-
 module.exports = generate;
 
