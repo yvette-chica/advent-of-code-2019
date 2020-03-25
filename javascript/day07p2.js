@@ -29,7 +29,7 @@ const getThrusterOutput = (controllerSoftware, phaseSettingSequence) => {
     return output;
 }
 
-// provide input instruction first then previous output
+// Get all possible phase setting sequences
 heapPermutation(5, phaseSettingSequence, settingSequencePermutations);
 
 let maxThrusterSignal = 0;
@@ -40,4 +40,6 @@ settingSequencePermutations.forEach(settingSequence => {
 
 
 console.log('maxThrusterSignal', maxThrusterSignal);
+
+module.exports = () => maxThrusterSignal;
 

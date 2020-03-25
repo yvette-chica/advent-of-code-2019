@@ -16,3 +16,4 @@ while (intcodeComputer.opcode !== '99') {
 
 console.log('output', output);
 
+module.exports = () => output;
