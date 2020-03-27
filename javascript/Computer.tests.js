@@ -1,7 +1,7 @@
 const intcodeComputerDays = [
     { number: '05', expected: [13346482, 12111395] },
     { number: '07', expected: [47064, 4248984] },
-    { number: '09', expected: [3989758265] },
+    { number: '09', expected: [3989758265, 76791] },
 ];
 
 intcodeComputerDays.forEach(day => {
